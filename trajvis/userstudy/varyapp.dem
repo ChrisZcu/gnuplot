@@ -1,0 +1,34 @@
+set term postscript eps enhanced lw 4 font "Helvetica, 32"
+#set key inside top right center horizontal maxrows 3 noreverse
+#set key autotitles columnhead samplen 2.0 font ",30"
+set key inside horizontal top center noreverse nobox autotitle columnhead samplen 0.2 font ",20"
+#set key off
+
+set style data histogram
+set style histogram cluster
+set boxwidth 0.80
+set pointsize 4
+
+set datafile missing '-'
+
+
+set output "userstudy.ps"
+set ylabel 'Average accuracy' offset 1.0,0
+set xlabel 'User study tasks' offset 0,0
+
+set yrange [0:1.2] noreverse nowriteback
+#set ytics 0.0,0.2,1.0
+set ytics ("0.0" 0, "0.2" 0.2, "0.4" 0.4, "0.6" 0.6, "0.8" 0.8, "1.0" 1.0)
+set format y "%.1t"
+
+set xrange [-0.4:2.5] noreverse nowriteback
+set xtics ("(T1)" 0.1, "(T2)" 1.1, "(T3)" 2.1)
+
+plot 'user.dat' using 2 fs pattern 6 lt 1 lw 1, \
+     'user.dat' using 3 fs pattern 0 lt 1 lw 1, \
+     'user.dat' using 4 fs pattern 4 lt 1 lw 1, \
+     'user.dat' using 5 fs pattern 1 lt 1 lw 1, \
+     'user.dat' using 6 fs pattern 3 lt 1 lw 1
+
+set output
+
